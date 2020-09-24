@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+  "name": "Mixbox",
+  "version": "0.0.1",
+  "description": "mixbox",
+  "permissions": ["tabs", "clipboardRead", "contextMenus", "activeTab"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mixbox.live/"],
+      "js": ["mb.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://note.com/amane_lan/n/*"],
+      "js": ["getlist.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
