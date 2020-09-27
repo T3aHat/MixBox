@@ -59,6 +59,7 @@ function get_now() {
   if (!target || target.innerText == "") {
     setTimeout(get_now, 1000);
   } else if (song != target.innerText) {
+    console.log("Now Playing : " + target.innerText);
     html = "";
     chatlist = chat.innerHTML.replace(
       /<p style="color:white;background-color:#50BFD3;font-size:1.6rem;">/g,
