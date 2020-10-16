@@ -21,17 +21,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-
+var target = "";
 function get_link() {
-  let target = document.getElementsByClassName("character__comment__link")[0];
-  if (!target) {
+  if (!document.getElementsByClassName("character__comment__link")[0]) {
     setTimeout(get_link, 100);
   } else {
-    chrome.runtime.sendMessage(
-      { message: "get_list", url: target.textContent },
-      function (response) {}
-    );
-    return target.textContent;
+    if (
+      document.getElementsByClassName("character__comment__link")[0] != target //link changed
+    ) {
+      target = document.getElementsByClassName("character__comment__link")[0];
+      chrome.runtime.sendMessage(
+        { message: "get_list", url: target.textContent },
+        function (response) {}
+      );
+      setTimeout(get_link, 120000); //2 minutes(プレイリストが変わる頻度は高くない)
+      console.log("song list:\n" + target.textContent);
+      return target.textContent;
+    } else {
+      setTimeout(10000, get_link); //10s
+    }
   }
 }
 

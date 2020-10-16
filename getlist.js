@@ -31,7 +31,6 @@ function get_list() {
       { message: "got_list", list: target.firstChild.innerHTML },
       function (response) {}
     );
-    setTimeout(get_link, 300000); //5分ごとにプレイリストが変わっていないか確認(未確認)
     return target.textContent;
   }
 }
